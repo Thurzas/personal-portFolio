@@ -1,5 +1,5 @@
-import { useFrame, useThree } from "@react-three/fiber";
-import { MutableRefObject, useEffect, useRef, useState } from "react";
+import { useThree } from "@react-three/fiber";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ShaderGLTF } from "./shaderGLTF";
 import { ShaderText3DMatrix } from "./shaderText3D";

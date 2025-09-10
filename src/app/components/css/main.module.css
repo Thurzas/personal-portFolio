@@ -1,21 +1,34 @@
-#header{
-    position:absolute;
+.header {
+  position: relative; /* important */
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
 }
 
 .subWrapper {
-  margin: 2rem;
+  position: absolute;
+  top: 250px;
+  z-index: 10; /* > Canvas */
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  padding: 2rem;
 }
 
-.triggerBtn {
-  background: transparent;
-  border: 2px solid #33f0dd;
-  color: #33f0dd;
-  padding: 10px 20px;
-  cursor: pointer;
-  font-size: 1rem;
-  border-radius: 8px;
-  transition: all 0.3s;
+.no-scroll {
+  overflow: hidden;
+  height: 100vh;
 }
+.subScreen {
+  opacity: 0;
+  position: relative;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 40%;
+  z-index: 20; /* encore plus haut si besoin */
+}
+
 
 .triggerBtn:hover {
   background: #33f0dd;
@@ -23,26 +36,32 @@
 }
 
 /* Écran futuriste */
-.subScreen {
-  margin-top:190px;
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  justify-content: center;
-  align-items: center;
+.wrapper {
+  display: none; 
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 400px;
 }
 
+.photo
+{
+  border:4px solid black;
+  border-bottom: 20px solid black;
+  padding: -10;
+  max-width: 20em;
+  max-height : 30em;
+}
 /* Cadre futuriste */
 .screenFrame {
+  border-color: #009a22;
   border-left: 6px solid #222;
   border-right: 6px solid #222;
   border-top: none;
   border-bottom: none;
   padding: 1.5rem;
   border-color:#009a22;
-  padding: 3rem;
-  max-width: 80%;
+  padding: 2rem;
   width: fit-content;
   margin: 0 auto;
   position: relative;
@@ -50,10 +69,15 @@
   opacity: 0.9;
 }
 
+.screnFrame .articles{
+  display: flex;
+  flex-direction: column;
+}
 .screenFrame h2 {
   font-size: 2rem;
   color: #009a22;
   text-shadow: 0 0 20px #70ff8f;
+  padding-bottom: 2rem;
 }
 
 .screenFrame p {
@@ -61,20 +85,4 @@
   line-height: 1.4;
   color: #eee;
   margin-top: 1rem;
-}
-
-/* Bouton fermeture */
-.closeBtn {
-  top: 10px;
-  right: 15px;
-  background: transparent;
-  border: none;
-  font-size: 1.5rem;
-  color: #33f0dd;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-
-.closeBtn:hover {
-  transform: scale(1.2);
 }

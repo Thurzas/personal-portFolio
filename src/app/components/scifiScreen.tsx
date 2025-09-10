@@ -1,19 +1,19 @@
-import { useRef } from "react";
+import { useRef, useEffect } from "react";
 import { gsap } from "gsap";
 import Style from "./css/main.module.css";
 
 interface ScifiScreenProps {
   title: string;
   children?: React.ReactNode;
+  delay?: number; // délai en ms
 }
 
-const ScifiScreen = ({ title, children }: ScifiScreenProps) => {
+const ScifiScreen = ({ title, children, delay = 0 }: ScifiScreenProps) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const openScreen = () => {
     const el = containerRef.current;
     if (!el) return;
-    gsap.set(el, { display: "block" });
 
     gsap.fromTo(
       el,
@@ -22,38 +22,19 @@ const ScifiScreen = ({ title, children }: ScifiScreenProps) => {
     );
   };
 
-  const closeScreen = () => {
-    const el = containerRef.current;
-    if (!el) return;
-    gsap.fromTo(
-      el,
-      { scaleX: 1, opacity: 1 },
-      {
-        scaleX: 0,
-        opacity: 0,
-        transformOrigin: "25% 50%", // centre horizontal
-        duration: 0.6,
-        ease: "expo.out",
-        OnComplete: () => gsap.set(el, { display: "none" }),
-      }
-    );
-  };
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      openScreen();
+    }, delay);
+
+    return () => clearTimeout(timer);
+  }, [delay]);
 
   return (
-    <div className={Style.subWrapper}>
-      <button className={Style.triggerBtn} onClick={openScreen}>
-        Ouvrir {title}
-      </button>
-
-      <div className={Style.subScreen} ref={containerRef}>
-        <div className={Style.screenFrame}>
-          <h2>{title}</h2>
-          <div className={Style.content}>{children}</div>
-
-          <button className={Style.closeBtn} onClick={closeScreen}>
-            Fermer
-          </button>
-        </div>
+    <div className={Style.subScreen} ref={containerRef}>
+      <div className={Style.screenFrame}>
+        <h2>{title}</h2>
+        <div className={Style.content}>{children}</div>
       </div>
     </div>
   );
