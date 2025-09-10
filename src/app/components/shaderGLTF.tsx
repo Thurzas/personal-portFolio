@@ -84,16 +84,15 @@ export const ShaderGLTF = forwardRef<Object3D, ShaderGLTFProps>(
     return mat;
   }, [texture, viewport,scene]); // Ajout de viewport dans les dépendances
 
-  useEffect(() => {
-    if (shaderMat.current) {
-      scene.traverse((child) => {
-        if ((child as Mesh).isMesh) {
-          // L'assignation est maintenant sûre car le type est vérifié
-          (child as Mesh).material = shaderMat.current;
-        }
-      });
-    }
-  }, [scene, shaderMat]);
+useEffect(() => {
+  if (shaderMat.current) {
+    scene.traverse((child) => {
+      if ((child as Mesh).isMesh) {
+        (child as Mesh).material = shaderMat.current!;
+      }
+    });
+  }
+}, [scene,shaderMat]);
 
   useFrame(({ clock, size }) => {
     if (shaderMat.current) {

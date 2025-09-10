@@ -15,7 +15,6 @@ export function CinematicCamera() {
   const [titleIntensity, setTitleIntensity] = useState(5);
   const carRef = useRef<any>(null);
   const titleRef = useRef<any>(null);
-  const nameRef = useRef<any>(null);
 
   // --- Timeline / animation ---
   useEffect(() => {
@@ -28,20 +27,10 @@ export function CinematicCamera() {
         onComplete: () => {
           setCarVisible(false);
           setTitleVisible(true);
-          setRainDensity(0);
+          
         },
       });      
-    }
-    /* // gsap ne veux pas mettre à jour mes uniforms... du coup pour l'instant je met un "pansement" en interpolant manuellement...
-    if(titleRef.current){
-      console.info(titleRef.current.material.uniforms.uIntensity.value);
-      gsap.to(titleRef.current.material.uniforms.uIntensity, {
-        value: 0.3,
-        duration: 3,
-        ease: "power2.inOut",        
-      })
-    }  
-    */       
+    }    
 
     setTitleVisible(false);
   }, []);
@@ -90,10 +79,9 @@ export function CinematicCamera() {
           rotation={[0, Math.PI * 1.1, 0]}
           fontPath={"/fonts/Orbitron_Regular.json"}
           intensity={5}
-          flicker={2}
+
         />               
-      )
-      }
+      )}
 
 
       <GlyphRain

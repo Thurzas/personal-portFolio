@@ -45,22 +45,15 @@
   max-width: 80%;
   width: fit-content;
   margin: 0 auto;
-  text-align: center;
   position: relative;
   border-radius: 15px;
-  animation: neonGlow 1.5s ease-in-out infinite alternate;
+  opacity: 0.9;
 }
-@keyframes neonGlow {
-  from {
-    box-shadow: 0 -20px 5px #009a22, 0 0 10px #009a22;
-  }
-  to {
-    box-shadow: 0 -20px 15px #009a22, 0 0 30px #009a22;
-  }
-}
+
 .screenFrame h2 {
   font-size: 2rem;
   color: #009a22;
+  text-shadow: 0 0 20px #70ff8f;
 }
 
 .screenFrame p {
