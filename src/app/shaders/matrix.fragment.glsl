@@ -12,6 +12,7 @@ uniform float uFlicker;  // vitesse de changement de glyphe
 uniform float uTrailLen; // longueur max de la traînée (ici 5)
 uniform float uSpeed; // longueur max de la traînée (ici 5)
 uniform float uMatrixScale;
+uniform float uIntensity;
 
 varying vec3 vNormal;
 varying vec2 vUv;
@@ -27,24 +28,15 @@ vec4 getMatrixPattern(vec2 st, float time) {
     vec2 grid = floor(st);
     vec2 uv = fract(st);
 
-    // Vitesse et position de la traînée
+    // Vitesse et position de la traînée, négatif pour diriger les glyphes vers le bas.
     float speed = -uSpeed * (0.5 + 1.5 * hash(vec2(grid.x, 0.0)));
     float head = mod(time * speed, uRows);
     float distToHead = mod(grid.y - head + uRows, uRows);
     float intensity = 0.0;
+    
     // Si la cellule est dans la traînée
     if(distToHead < uTrailLen){
-        // Tête très brillante, traînée décroissante
-        intensity = (uTrailLen - distToHead)*4.0 / uTrailLen;
-
-        // Option 1: Puissance (recommandé)
-        // Rend le haut de la traînée plus intense. Ajustez la puissance (2.0)
-        // pour contrôler la luminosité du haut.
-        intensity = pow(intensity, 1.5); // Ou une autre valeur, comme 1.5, 3.0, etc.
-        
-        // Option 2: Ajout d'une constante (plus simple)
-        // Ajoute un boost de luminosité constant à la traînée
-        // intensity = (uTrailLen - distToHead) / uTrailLen + 0.2; // Ajustez la valeur (0.2)
+        intensity = (uTrailLen - distToHead) / uTrailLen + uIntensity;
     }
 
     // Glyphes

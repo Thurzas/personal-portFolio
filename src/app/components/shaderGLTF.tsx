@@ -1,12 +1,12 @@
 'use client';
 import { useMemo, useRef, useEffect } from "react";
 import { useGLTF } from "@react-three/drei";
-import { Mesh, ShaderMaterial, TextureLoader, NearestFilter, Scene, Object3D, Vector2, Vector3 } from "three";
+import { Mesh, ShaderMaterial, TextureLoader, NearestFilter, Scene, Object3D, Vector2, Vector3, Camera } from "three";
 import { useFrame, useThree } from "@react-three/fiber";
 import type { GLTF } from "three-stdlib";
 import fragmentShader from "../shaders/matrix.fragment.glsl";
 import vertexShader from "../shaders/matrix.vertex.glsl";
-import { NumberNodeUniform } from "three/src/renderers/common/nodes/NodeUniform.js";
+import { forwardRef } from "react";
 
 interface ShaderGLTFProps {
   gltfPath: string;
@@ -14,15 +14,11 @@ interface ShaderGLTFProps {
   position?: [number, number, number];
   scale?: [number, number, number];
   rotation?: [number, number, number];
-}
+  intensity?:number;
+} 
 
-export const ShaderGLTF: React.FC<ShaderGLTFProps> = ({
-  gltfPath,
-  texturePath,
-  position = [0, 0, 0],
-  rotation = [0, 0, 0],
-  scale = [1, 1, 1],
-}) => {
+export const ShaderGLTF = forwardRef<Object3D, ShaderGLTFProps>(
+  ({ gltfPath, texturePath, position = [0, 0, 0], rotation = [0, 0, 0], scale = [1, 1, 1], intensity = 1.2 }, ref) => {
   const { viewport } = useThree(); // Hook pour obtenir la résolution
 
   const { scene } = useGLTF(gltfPath) as GLTF & { scene: Object3D };
@@ -70,7 +66,7 @@ export const ShaderGLTF: React.FC<ShaderGLTFProps> = ({
         resolution: { value: new Vector2(0.5,0.5) },
         uGlyphs: { value: texture },
         uAtlasSide:  { value: 9.0 },
-        uCols: { value: 64.0 },
+        uCols: { value: 16.0 },
         uRows: { value: 64.0 },
         uFlicker: { value: 10.0 },
         uTrailLen: { value: 25.0 },
@@ -78,17 +74,17 @@ export const ShaderGLTF: React.FC<ShaderGLTFProps> = ({
         uMinUv: { value: minUv },
         uMaxUv: { value: maxUv },
         uMatrixScale: { value: 5 },
+        uIntensity: { value: intensity},
       },
-      transparent: true, // Nécessaire si ta texture a de la transparence
-      depthWrite: false, // Ajout pour ignorer l'écriture dans le z-buffer
-      depthTest: true, // Pour que l'objet soit toujours visible
+      transparent: true, 
+      depthWrite: false, 
+      depthTest: true,
     });
     shaderMat.current = mat;
     return mat;
   }, [texture, viewport,scene]); // Ajout de viewport dans les dépendances
 
   useEffect(() => {
-    // Vérifier si la référence et son contenu sont non-nuls
     if (shaderMat.current) {
       scene.traverse((child) => {
         if ((child as Mesh).isMesh) {
@@ -101,7 +97,7 @@ export const ShaderGLTF: React.FC<ShaderGLTFProps> = ({
 
   useFrame(({ clock, size }) => {
     if (shaderMat.current) {
-      // La ligne ci-dessous n'est normalement pas nécessaire mais peut servir de test
+      // La ligne ci-dessous n'est normalement pas nécessaire
       shaderMat.current.uniforms.time.value = clock.getElapsedTime();
       shaderMat.current.uniforms.resolution.value.set(size.width, size.height);
     }
@@ -109,9 +105,12 @@ export const ShaderGLTF: React.FC<ShaderGLTFProps> = ({
 
   return (
     <primitive
+      ref={ref} 
       object={scene}
       position={position}
+      rotation={rotation}
       scale={scale}
     />
   );
-};
+  
+});

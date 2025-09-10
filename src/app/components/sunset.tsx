@@ -1,9 +1,9 @@
 'use client';
-import { useRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import { invalidate, useFrame } from "@react-three/fiber";
-import { Color, Mesh, PointLight, ShaderMaterial, Vector2, Vector3 } from "three";
-import fragmentShader from "../shaders/striped.fragment.glsl";
-import vertexShader from "../shaders/striped.vertex.glsl";
+import { Color, Mesh, NearestFilter, PointLight, ShaderMaterial, TextureLoader, Vector2, Vector3 } from "three";
+import fragmentShader from "../shaders/matrix.fragment.glsl";
+import vertexShader from "../shaders/matrix.vertex.glsl";
 import { forwardRef } from "react";
 import { Bloom, EffectComposer, GodRays } from "@react-three/postprocessing";
 interface pos{
@@ -18,7 +18,21 @@ const Sunset = forwardRef<Mesh, { position: Vector3 }>(({ position }, ref) => {
       invalidate();
     }
   });
+  const [texturePath,setTexturePath] = useState<string>("/textures/matrix_glyph_atlas.png");
+  const texture = useMemo(() => {
+    const t = new TextureLoader().load(texturePath);
+    t.generateMipmaps = false;
+    t.magFilter = NearestFilter;
+    t.minFilter = NearestFilter;
+    return t;
+  }, [texturePath]);
 
+   useFrame(({ clock, size }) => {
+    if (materialRef.current) {
+      materialRef.current.uniforms.time.value = clock.getElapsedTime();
+      materialRef.current.uniforms.resolution.value.set(size.width, size.height);
+    }
+  });
   return (
     <mesh ref={ref} rotation={[0, 0, 0]} position={position?position:new Vector3(0)} >
       <sphereGeometry args={[3, 32, 32]}/>        
@@ -43,12 +57,18 @@ const Sunset = forwardRef<Mesh, { position: Vector3 }>(({ position }, ref) => {
             fragmentShader={fragmentShader} 
             uniforms= {{
               time: { value: 0 },
-              uSize: { value: new Vector2(10.0, 10.0) }, // Taille du motif
-              uColorA: { value: new Color(1.0, 0.8, 0) }, // orange
-              uColorB: { value: new Color(1.0, 0, 0) }, // rouge
-              uStripeWidth: { value: 0.5 }, // Largeur des rayures
-              uTransparency: { value: 1.0 }, // 1.0 = totalement transparent
-              uSpeed: { value: 1.0 },
+              resolution: { value: new Vector2(0.5,0.5) },
+              uGlyphs: { value: texture },
+              uAtlasSide:  { value: 9.0 },
+              uCols: { value: 16.0 },
+              uRows: { value: 64.0 },
+              uFlicker: { value: 10.0 },
+              uTrailLen: { value: 25.0 },
+              uSpeed: { value: 50.0 },
+              uMinUv: { value: 0 },
+              uMaxUv: { value: 50 },
+              uMatrixScale: { value: 5 },
+              uIntensity: { value: 2.0},
             }}
             transparent={true} 
         />

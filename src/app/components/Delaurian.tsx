@@ -18,7 +18,7 @@ export const Delaurian = () => {
     return t;
   }, []);
 
-  const { scene } = useGLTF("/betterDelaurian.glb");
+  const { scene } = useGLTF("/delorean.glb");
 
   // Crée le shaderMaterial une fois
   const shaderMat = useMemo(() => {

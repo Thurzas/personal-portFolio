@@ -2,15 +2,19 @@
 import { useRef, forwardRef } from "react";
 import { invalidate, useFrame } from "@react-three/fiber";
 import { Mesh, ShaderMaterial, TextureLoader, Vector2, NearestFilter } from "three";
-import fragmentShader from "../shaders/matrix.fragment.glsl";
-import vertexShader from "../shaders/matrix.vertex.glsl";
+import fragmentShader from "../shaders/2Dmatrix.fragment.glsl";
+import vertexShader from "../shaders/2Dmatrix.vertex.glsl";
 
 const MatrixVision = forwardRef<Mesh, {
   width?: number;
   height?: number;
   cols?: number;
   rows?: number;
-}>(({ width = 2, height = 2, cols = 16, rows = 64 }, ref) => {
+  position?: [number, number, number];
+  rotation?: [number, number, number];
+  matrixScale?:number;
+  intensity?:number;
+}>(({ width = 2, height = 2, cols = 8, rows = 64, position=[0, 0, 0], rotation=[0,0,0], matrixScale=1, intensity=0.5}, ref) => {
   const materialRef = useRef<ShaderMaterial>(null);
 
   // Charge l’atlas une fois
@@ -27,7 +31,7 @@ const MatrixVision = forwardRef<Mesh, {
   });
 
   return (
-    <mesh ref={ref}>
+    <mesh ref={ref} position={position} rotation={rotation}>
       <planeGeometry args={[width, height]} />
       <shaderMaterial
         ref={materialRef}
@@ -41,9 +45,10 @@ const MatrixVision = forwardRef<Mesh, {
           uCols:       { value: cols },
           uRows:       { value: rows },
           uFlicker:    { value: 2.0 },
-          uTrailLen:   { value: 10.0 }, // ← longueur max de la traînée
-          uSpeed:      { value: 25.0 }, 
-          uMatrixScale: { value: 5 },
+          uTrailLen:   { value: 8.0 }, 
+          uSpeed:      { value: 15.0 },           
+          uMatrixScale: { value: matrixScale },
+          uIntensity: { value: intensity}
         }}
         transparent= {true}
         depthWrite= {false} // Ajout pour ignorer l'écriture dans le z-buffer
