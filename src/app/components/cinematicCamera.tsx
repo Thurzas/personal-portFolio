@@ -7,7 +7,11 @@ import GlyphRain from "./GlyphRain";
 import Sunset from "./sunset";
 import { PlaneGeometry, ShaderMaterial, Vector3 } from "three";
 
-export function CinematicCamera() {
+interface CinematicCameraProps
+{
+  cameraPos : [number,number, number];
+}
+export function CinematicCamera({cameraPos}:CinematicCameraProps) {
   const { camera } = useThree();
   const [carVisible, setCarVisible] = useState(true);
   const [titleVisible, setTitleVisible] = useState(true);
@@ -37,9 +41,9 @@ export function CinematicCamera() {
 
   useEffect(() => {
     const timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-    timeline.to(camera.position, { x: 2, y: 3, z: -40, duration: 15 });
-    timeline.to(camera.position, { x: -10, y: 7, z: -80, duration: 15 });
-    timeline.to(camera.position, { x: -7, y: 5, z: -72, duration: 5 });
+    timeline.to(camera.position, { x: cameraPos[0] + 2, y: cameraPos[1]+3, z: cameraPos[2]-40, duration: 15 });
+    timeline.to(camera.position, { x: cameraPos[0]-10, y: cameraPos[1]+7, z: cameraPos[2]-80, duration: 15 });
+    timeline.to(camera.position, { x: cameraPos[0]-7, y: cameraPos[1]+5, z: cameraPos[2]-72, duration: 5 });
 
     gsap.ticker.add(() => {
       camera.lookAt(0, 0, -50);

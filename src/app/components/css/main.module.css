@@ -97,3 +97,74 @@
   color: #eee;
   margin-top: 1rem;
 }
+
+
+/* --- Tablette --- */
+@media (max-width: 1024px) {
+  .subWrapper {
+    top: 150px; /* remonter un peu le contenu */
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+  }
+
+  .subScreen {
+    max-width: 80%; /* plus large pour s'adapter à l'écran */
+  }
+
+  .screenFrame {
+    padding: 1.5rem;
+    max-width: 90%;
+  }
+
+  .screenFrame h2 {
+    font-size: 1.8rem;
+  }
+
+  .screenFrame p {
+    font-size: 1rem;
+  }
+}
+
+/* --- Téléphone --- */
+@media (max-width: 600px) {
+  .header canvas{
+    width: 90vw !important;
+    height:50vh !important;
+    margin: 0 auto;
+  }
+  .subWrapper {
+    top: 100px; 
+    padding: 1rem;
+    gap: 1rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .subScreen {
+    max-width: 100%; /* pleine largeur */
+
+  }
+
+  .screenFrame {
+    padding: 1rem;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    width:80%;
+    width: fit-content;
+  }
+
+  .articles{
+    flex-direction: column;
+  }
+
+  .screenFrame h2 {
+    font-size: 1.5rem;
+    padding-bottom: 1rem;
+  }
+
+  .screenFrame p {
+    font-size: 0.95rem;
+  }
+}

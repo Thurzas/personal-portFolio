@@ -19,7 +19,7 @@ export default function Home() {
   let fov = 42;
 
   if (screenType === "tablet") {
-    cameraPosition = [0, 2.5, 8];
+    cameraPosition = [0, 2.5, -8];
     fov = 50;
   } else if (screenType === "mobile") {
     cameraPosition = [0, 2, 6];
@@ -37,7 +37,7 @@ export default function Home() {
             gl.setClearColor("#350223ff");
             }}
             >
-        <CinematicCamera />
+        <CinematicCamera cameraPos={cameraPosition}/>
         </Canvas>
       </div>
       <div className={Style.subWrapper}>
