@@ -15,7 +15,7 @@ export default function Home() {
   const cameraRef = useRef<HTMLCanvasElement>(null);
   const screenType = useScreenType();
 
-  let cameraPosition = [0, 3, 10]; // desktop default
+  let cameraPosition: [number, number, number] = [0, 3, 10]; // desktop default
   let fov = 42;
 
   if (screenType === "tablet") {
