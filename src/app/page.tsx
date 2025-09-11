@@ -15,7 +15,7 @@ export default function Home() {
   const cameraRef = useRef<HTMLCanvasElement>(null);
   const screenType = useScreenType();
 
-  let cameraPosition: [number, number, number] = [0, 3, 10]; // desktop default
+  let cameraPosition: [number, number, number] = [0, 3, 4]; // desktop default
   let fov = 42;
 
   if (screenType === "tablet") {
@@ -37,7 +37,7 @@ export default function Home() {
             gl.setClearColor("#350223ff");
             }}
             >
-        <CinematicCamera cameraPos={cameraPosition}/>
+        <CinematicCamera cameraPos={cameraPosition as [number, number, number]}/>
         </Canvas>
       </div>
       <div className={Style.subWrapper}>
