@@ -75,23 +75,23 @@ export default function Home() {
         <ScifiScreen title="mon travail :" delay={31000}>
           <div className={Style.articles}>
             <article>
-              <h4>Preuve N°1</h4>
+              <h4>prototype 1</h4>
               <p>blackhole project: teste de collision (inspiré du problème à n corps) </p>
               <img className={Style.photo} alt="Preuve N°1" src="img/blackhole.png" />
               <a href="https://codepen.io/Thurzas/pen/dyJzOLe">demonstration sur codepen</a>
             </article>
             <article>
-              <h4>Preuve N°2</h4>
+              <h4>vieille maquette</h4>
               <img className={Style.photo} alt="Preuve N°2" src="img/null.png" />
               <p><a href="https://thurzas.github.io/DP001/index.html">Objectif : null</a></p>
             </article>
             <article>
-              <h4>Preuve N°3</h4>
+              <h4>prototype 2</h4>
               <img className={Style.photo} alt="Preuve N°3" src="img/procedural.png" />
               <p><a href="https://github.com/Thurzas/ProceduralDungeon">(Processing) Procedural Dungeon challenge</a></p>
             </article>
             <article>
-              <h4>Preuve N°4</h4>
+              <h4>Prototype 3</h4>
               <img className={Style.photo} alt="Preuve N°3" src="img/ants.jpg" />
               <p><a href="https://github.com/Thurzas/ants">(Processing) Ant Colony Simulation</a></p>
             </article>

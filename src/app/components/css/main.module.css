@@ -3,8 +3,19 @@
   width: 100vw;
   height: 100vh;
   background-color: #000;
+  overflow: hidden;
 }
 
+
+.articles{
+ display:flex;
+ flex-direction: row;
+ justify-content: space-evenly; 
+}
+
+.articles article{
+  padding:2rem;
+}
 .subWrapper {
   position: absolute;
   top: 250px;
@@ -71,7 +82,7 @@
 
 .screnFrame .articles{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 .screenFrame h2 {
   font-size: 2rem;
