@@ -256,7 +256,7 @@ export default function GlyphRain({
       }
 
       dummy.position.copy(p.pos);
-      //dummy.quaternion.copy(camQuat); // billboarding
+      dummy.quaternion.copy(camQuat);
       dummy.quaternion.set(0, 0, 0, 1);
       dummy.scale.set(size, size, size);
       dummy.updateMatrix();
