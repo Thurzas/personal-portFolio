@@ -89,6 +89,12 @@
   padding-bottom: 2rem;
 }
 
+.screenFrame h3 {
+  font-size: 2rem;
+  color: #009a22;
+  text-shadow: 0 0 20px #70ff8f;
+  padding: 2rem;  
+}
 .screenFrame p {
   font-size: 1.1rem;
   line-height: 1.4;

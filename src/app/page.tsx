@@ -50,29 +50,20 @@ if (screenType === "tablet") {
           <p>
             Je suis développeur web React / R3F, ma formation a commencé en novembre
             2024, je suis sur le marché de l'emploi depuis juin 2025.
-          </p>
+          </p>          
         </ScifiScreen>
 
-        <ScifiScreen title="Compétences :" delay={32500}>
-          <h3>Développer la partie Front :</h3>
-          <ul>
-            <li>Maquetter une application.</li>
-            <li>Réaliser une interface utilisateur web statique et adaptable.</li>
-            <li>Développer une interface utilisateur web dynamique.</li>
-            <li>Réaliser une interface utilisateur avec une solution de gestion de contenu ou e-commerce.</li>
-          </ul>
-          <h3>Développer la partie Back :</h3>
-          <ul>
-            <li>Créer une base de donnée.</li>
-            <li>Développer les composants d'accès aux données.</li>
-            <li>
-              Développer la partie back-end d'une application web ou web mobile.
-            </li>
-            <li>
-              Élaborer et mettre en œuvre des composants dans une application de
-              gestion de contenu ou e-commerce.
-            </li>
-          </ul>
+        <ScifiScreen title="mes réseaux :" delay={32500}>
+          <p>
+            <a href={"https://github.com/Thurzas"}>
+            <img className={Style.icon} alt={"lien github vers mon profil"} src={"img/github-icon.svg"} /> Mon profil
+            </a>
+          </p>
+          <p>
+            <a href={"https://www.linkedin.com/in/mathieu-miot-15a065177/"}>
+              <img className={Style.icon} alt={"lien linkedin "} src={"img/linkedin.svg"}/> Mon réseau
+            </a>
+          </p>
         </ScifiScreen>
         <ScifiScreen title="mon travail :" delay={33000}>
           <div className={Style.articles}>
@@ -81,6 +72,9 @@ if (screenType === "tablet") {
               <p>
                 boutique en ligne d'une "dark kitchen" faite en équipe durant ma formation. Le front est codé avec React, et le back est une API managé par node.
               </p>
+              <a href={"https://github.com/WildCodeSchool/nov24-RemFR-Vert-FullStackAlchemist-G2-P3"}>
+                <img className={Style.icon} alt={"lien github vers le cookie du patron"} src={"img/github-icon.svg"} />
+              </a>
               <img className={Style.photo} alt="image du site <le cookie du patron>" src="img/CookiPatron.png" />              
             </article>
             <article>
