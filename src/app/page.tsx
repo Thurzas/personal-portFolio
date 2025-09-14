@@ -46,17 +46,17 @@ if (screenType === "tablet") {
       <div className={Style.subWrapper}>
         <ScifiScreen title="À propos de moi :" delay={32000}>
           <p>
-            moi c'est Matt, je suis un geek et un passionné de Jeu de rôle papier, D&D comme cyberPunk.</p>
-          <p>
-            je me suis mit aussi à l'impression 3D, en ce moment, je fabrique des voitures radiocommandés pour mon neveu.
-          </p>
-          <p>  
-             J'ai commencé à m'intéresser au IA génératives ( en local, pas du chatGPT ou du midjourney ! ). et en ce moment, j'apprend python juste pour mieu comprendre comment fonctionne tensorflow et xformers.
+            Je m'appelle Matt, développeur passionné par les technologies et la créativité. 
           </p>
           <p>
-            Bref....je suis avant tout un développeur. Je sort d'une formation qui a commencé en novembre
-            2024, je suis sur le marché de l'emploi depuis juin 2025.
-          </p>          
+            À côté du code, je m'intéresse aux jeux de rôle sur papier (Donjons & Dragons, Cyberpunk), à l'impression 3D et à l'intelligence artificielle générative. 
+          </p>
+          <p>
+            Actuellement, j'approfondis mes compétences en Python afin de mieux comprendre des frameworks tels que TensorFlow et Xformers.
+          </p>
+          <p>
+            Je sors d'une formation commencée en novembre 2024 et je suis sur le marché de l'emploi depuis juin 2025.
+          </p>               
         </ScifiScreen>
 
         <ScifiScreen title="mes réseaux :" delay={32500}>
