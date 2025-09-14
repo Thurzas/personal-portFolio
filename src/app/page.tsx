@@ -45,10 +45,17 @@ if (screenType === "tablet") {
       </div>
       <div className={Style.subWrapper}>
         <ScifiScreen title="À propos de moi :" delay={32000}>
-          <p>moi c'est Matt, développeur react et prochainement développeur IA</p>
+          <p>
+            moi c'est Matt, je suis un geek et un passionné de Jeu de rôle papier, D&D comme cyberPunk.</p>
+          <p>
+            je me suis mit aussi à l'impression 3D, en ce moment, je fabrique des voitures radiocommandés pour mon neveu.
+          </p>
+          <p>  
+             J'ai commencé à m'intéresser au IA génératives ( en local, pas du chatGPT ou du midjourney ! ). et en ce moment, j'apprend python juste pour mieu comprendre comment fonctionne tensorflow et xformers.
+          </p>
           <img />
           <p>
-            Je suis développeur web React / R3F, ma formation a commencé en novembre
+            Bref....je suis avant tout un développeur. Je sort d'une formation qui a commencé en novembre
             2024, je suis sur le marché de l'emploi depuis juin 2025.
           </p>          
         </ScifiScreen>
