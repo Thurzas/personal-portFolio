@@ -53,7 +53,6 @@ if (screenType === "tablet") {
           <p>  
              J'ai commencé à m'intéresser au IA génératives ( en local, pas du chatGPT ou du midjourney ! ). et en ce moment, j'apprend python juste pour mieu comprendre comment fonctionne tensorflow et xformers.
           </p>
-          <img />
           <p>
             Bref....je suis avant tout un développeur. Je sort d'une formation qui a commencé en novembre
             2024, je suis sur le marché de l'emploi depuis juin 2025.
