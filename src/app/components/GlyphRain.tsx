@@ -41,6 +41,9 @@ const vertexShader = /* glsl */ `
 
 
 const fragmentShader = /* glsl */ `
+precision highp float;
+precision highp int;
+
 uniform sampler2D uGlyphs;
 uniform float uCols;
 uniform float uRows;
@@ -56,37 +59,40 @@ varying float vGlyphIndex;
 void main() {
   vec3 color = vec3(0.0);
 
-  // Fraction de la colonne [0..1] selon la hauteur du quad
+  // Fraction verticale de la colonne (0 en haut → 1 en bas)
   float v = vUv.y;
 
-  // Position "globale" qui défile avec le temps
+  // Décalage global avec le temps
   float globalOffset = uTime * 5.0;
 
-  // Découpe la colonne en uTrailLength segments
+  // Taille d'une tuile (UV d'un glyphe)
+  vec2 tileSize = vec2(1.0 / uCols, 1.0 / uRows);
+
+  // Découpe la colonne en segments
   for (int i = 0; i < 20; i++) {
     if (float(i) >= uTrailLength) break;
 
-    // Position locale de ce segment (0 en haut → 1 en bas)
     float segTop = float(i) / uTrailLength;
     float segBottom = (float(i) + 1.0) / uTrailLength;
 
-    // Est-ce que le fragment courant est dans ce segment ?
     if (v >= segTop && v < segBottom) {
-      // Interpolation locale
       float t = (v - segTop) * uTrailLength;
 
-      // Quel glyph pour ce segment ?
-      float glyphIndex = mod(vGlyphIndex + globalOffset + float(i), uGlyphCount);
+      // Index entier du glyphe (stabilisé)
+      float rawIndex = floor(vGlyphIndex + globalOffset + float(i));
+      float glyphIndex = mod(rawIndex, uGlyphCount);
+
       float gx = mod(glyphIndex, uCols);
       float gy = floor(glyphIndex / uCols);
 
-      vec2 tileSize = vec2(1.0 / uCols, 1.0 / uRows);
-      vec2 glyphUV = vec2(vUv.x, t) * tileSize + vec2(gx, gy) * tileSize;
+      // UV de base pour ce glyph
+      vec2 baseUV = vec2(gx, gy) * tileSize;
+      vec2 glyphUV = baseUV + vec2(vUv.x * tileSize.x, t * tileSize.y);
 
       vec4 tex = texture2D(uGlyphs, glyphUV);
 
       if (tex.a > 0.05) {
-        float fade = pow(uTrailFade, float(i)); // atténuation par segment
+        float fade = pow(uTrailFade, float(i));
         color += vec3(0.0, 1.0, 0.15) * tex.a * fade;
       }
     }
@@ -97,6 +103,7 @@ void main() {
   gl_FragColor = vec4(color, uOpacity);
 }
 `;
+
 
 
 export default function GlyphRain({
