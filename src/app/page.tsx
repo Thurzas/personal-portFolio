@@ -18,13 +18,16 @@ export default function Home() {
   let cameraPosition: [number, number, number] = [0, 3, 4]; // desktop default
   let fov = 42;
 
-  if (screenType === "tablet") {
-    cameraPosition = [0, 2.5, -8];
-    fov = 50;
-  } else if (screenType === "mobile") {
-    cameraPosition = [0, 2, 6];
-    fov = 55;
-  }
+if (screenType === "tablet") {
+  cameraPosition = [0, 2.5, -8] as const;
+  fov = 50;
+} else if (screenType === "mobile") {
+  cameraPosition = [0, 2, 10] as const;
+  fov = 55;
+} else {
+  cameraPosition = [0, 3, 15] as const;
+  fov = 42;
+}
   return (
     <>
       <div className={Style.header} style={{ width: "100vw", height: "100vh" }}>
@@ -37,27 +40,26 @@ export default function Home() {
             gl.setClearColor("#350223ff");
             }}
             >
-        <CinematicCamera cameraPos={cameraPosition as [number, number, number]}/>
+        <CinematicCamera viewType={screenType}/>
         </Canvas>
       </div>
       <div className={Style.subWrapper}>
-        <ScifiScreen title="À propos de moi :" delay={30000}>
+        <ScifiScreen title="À propos de moi :" delay={32000}>
+          <p>moi c'est Matt, développeur react et prochainement développeur IA</p>
+          <img />
           <p>
             Je suis développeur web React / R3F, ma formation a commencé en novembre
             2024, je suis sur le marché de l'emploi depuis juin 2025.
           </p>
         </ScifiScreen>
 
-        <ScifiScreen title="Compétences :" delay={30500}>
+        <ScifiScreen title="Compétences :" delay={32500}>
           <h3>Développer la partie Front :</h3>
           <ul>
             <li>Maquetter une application.</li>
             <li>Réaliser une interface utilisateur web statique et adaptable.</li>
             <li>Développer une interface utilisateur web dynamique.</li>
-            <li>
-              Réaliser une interface utilisateur avec une solution de gestion de
-              contenu ou e-commerce.
-            </li>
+            <li>Réaliser une interface utilisateur avec une solution de gestion de contenu ou e-commerce.</li>
           </ul>
           <h3>Développer la partie Back :</h3>
           <ul>
@@ -72,28 +74,40 @@ export default function Home() {
             </li>
           </ul>
         </ScifiScreen>
-        <ScifiScreen title="mon travail :" delay={31000}>
+        <ScifiScreen title="mon travail :" delay={33000}>
           <div className={Style.articles}>
+            <article>
+              <h4>le Cookie du patron</h4>
+              <p>
+                boutique en ligne d'une "dark kitchen" faite en équipe durant ma formation. Le front est codé avec React, et le back est une API managé par node.
+              </p>
+              <img className={Style.photo} alt="image du site <le cookie du patron>" src="img/CookiPatron.png" />              
+            </article>
+            <article>
+              <h4>maquette : La gazette du sorcier</h4>
+              <p>
+                forum écris en PHP ( et en équipe ).
+              </p>
+              <a href={"https://github.com/WildCodeSchool-2024-02/PHP-REM-POEC-05-Gazette-Sorciers"}>
+                <img className={Style.icon} alt={"lien github vers le forum de la gazette du sorcier"} src={"img/github-icon.svg"} />
+              </a>
+              <img className={Style.photo} alt={"image du site <La gazette du sorcier>"} src={"img/forumGazetteDuSorcier.png"} />              
+            </article>
             <article>
               <h4>prototype 1</h4>
               <p>blackhole project: teste de collision (inspiré du problème à n corps) </p>
-              <img className={Style.photo} alt="Preuve N°1" src="img/blackhole.png" />
-              <a href="https://codepen.io/Thurzas/pen/dyJzOLe">demonstration sur codepen</a>
-            </article>
-            <article>
-              <h4>vieille maquette</h4>
-              <img className={Style.photo} alt="Preuve N°2" src="img/null.png" />
-              <p><a href="https://thurzas.github.io/DP001/index.html">Objectif : null</a></p>
+              <img className={Style.photo} alt={"trou noir test de collision avec un quadtreee"} src={"img/blackhole.png"} />
+              <a href={"https://codepen.io/Thurzas/pen/dyJzOLe"}>demonstration sur codepen</a>
             </article>
             <article>
               <h4>prototype 2</h4>
-              <img className={Style.photo} alt="Preuve N°3" src="img/procedural.png" />
-              <p><a href="https://github.com/Thurzas/ProceduralDungeon">(Processing) Procedural Dungeon challenge</a></p>
+              <img className={Style.photo} alt={"image du prototype donjon procedural"} src={"img/procedural.png"} />
+              <p><a href={"https://github.com/Thurzas/ProceduralDungeon"}>(Processing) Procedural Dungeon challenge</a></p>
             </article>
             <article>
               <h4>Prototype 3</h4>
-              <img className={Style.photo} alt="Preuve N°3" src="img/ants.jpg" />
-              <p><a href="https://github.com/Thurzas/ants">(Processing) Ant Colony Simulation</a></p>
+              <img className={Style.photo} alt={"image de la simulation de colonie de fournie"} src={"img/ants.jpg"} />
+              <p><a href={"https://github.com/Thurzas/ants"}>(Processing) Ant Colony Simulation</a></p>
             </article>
           </div>
         </ScifiScreen>

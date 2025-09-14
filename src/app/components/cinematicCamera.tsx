@@ -5,20 +5,21 @@ import { ShaderGLTF } from "./shaderGLTF";
 import { ShaderText3DMatrix } from "./shaderText3D";
 import GlyphRain from "./GlyphRain";
 import Sunset from "./sunset";
-import { PlaneGeometry, ShaderMaterial, Vector3 } from "three";
+import { Vector3 } from "three";
 
-interface CinematicCameraProps
-{
-  cameraPos : [number,number, number];
+interface CinematicCameraProps{
+  viewType: string;
 }
-export function CinematicCamera({cameraPos}:CinematicCameraProps) {
+export function CinematicCamera( {viewType} : CinematicCameraProps ) {
   const { camera } = useThree();
   const [carVisible, setCarVisible] = useState(true);
   const [titleVisible, setTitleVisible] = useState(true);
   const [rainDensity, setRainDensity] = useState(1000);
   const [titleIntensity, setTitleIntensity] = useState(5);
+  const [titleRotation, setTitleRotation] = useState([0,Math.PI,0] as [number, number, number]);
   const carRef = useRef<any>(null);
-  const titleRef = useRef<any>(null);
+  const welcomeRef = useRef<any>(null);
+  const nameRef = useRef<any>(null);
 
   // --- Timeline / animation ---
   useEffect(() => {
@@ -36,17 +37,60 @@ export function CinematicCamera({cameraPos}:CinematicCameraProps) {
       });      
     }    
 
-    setTitleVisible(false);
+    setTitleVisible(false);  
+  }, []);
+
+    useEffect(() => {
+      if (welcomeRef.current) {
+      gsap.to(welcomeRef.current.rotation, {
+        x: 0,
+        y: 0,
+        z: 0,
+        duration: 2,
+        ease: "power2.inOut",
+        delay: 31,
+        onComplete: () =>{
+          setTitleRotation([0,0,0] as [number,number, number]);
+        }
+      });     
+    }  
+    setTitleVisible(false);  
   }, []);
 
   useEffect(() => {
     const timeline = gsap.timeline({ defaults: { ease: "power2.inOut" } });
-    timeline.to(camera.position, { x: cameraPos[0] + 2, y: cameraPos[1]+3, z: cameraPos[2]-40, duration: 15 });
-    timeline.to(camera.position, { x: cameraPos[0]-10, y: cameraPos[1]+7, z: cameraPos[2]-80, duration: 15 });
-    timeline.to(camera.position, { x: cameraPos[0]-7, y: cameraPos[1]+5, z: cameraPos[2]-72, duration: 5 });
+    timeline.to(camera.position, { x: 2, y: 3, z: -40, duration: 15 });
+    switch(viewType)
+    {
+      case "mobile":
+        timeline.to(camera.position, { x: -5, y: 7, z: -80, duration: 15 }); 
+      break;
 
+      default:
+        timeline.to(camera.position, { x: -10, y: 7, z: -80, duration: 15 });
+      break;
+    }
+    switch(viewType)
+    {
+      case "mobile":
+        timeline.to(camera.position, { x: welcomeRef.current.position.x, y: welcomeRef.current.position.y+5, z: welcomeRef.current.position.z-30 , duration: 5 });
+
+      break;
+
+      default:
+        timeline.to(camera.position, { x: welcomeRef.current.position.x+5, y: welcomeRef.current.position.y+15, z: welcomeRef.current.position.z-25, duration: 5 });        
+      break;
+    }
+    
     gsap.ticker.add(() => {
-      camera.lookAt(0, 0, -50);
+      if(carVisible)
+      {
+        camera.lookAt(0,0,-50);
+      } 
+      else
+      {
+        camera.lookAt(welcomeRef.current.position);
+      }
     });
   }, [camera]);
 
@@ -64,11 +108,11 @@ export function CinematicCamera({cameraPos}:CinematicCameraProps) {
 
       {titleVisible && (
         <ShaderText3DMatrix
-          ref={titleRef}
+          ref={welcomeRef}
           text={"Welcome on my site"}
           texturePath={"/textures/matrix_glyph_atlas.png"}
           position={[1, 7, -55]}
-          rotation={[0, Math.PI * 1.1, 0]}
+          rotation={titleRotation}
           fontPath={"/fonts/Orbitron_Regular.json"}
           intensity={titleIntensity}
         />               
@@ -76,14 +120,13 @@ export function CinematicCamera({cameraPos}:CinematicCameraProps) {
       }
       {titleVisible && (
         <ShaderText3DMatrix
-          ref={titleRef}
+          ref={nameRef}
           text={"Mathieu Miot"}
           texturePath={"/textures/matrix_glyph_atlas.png"}
           position={[ 9, 5, -49]}
-          rotation={[0, Math.PI * 1.1, 0]}
+          rotation={titleRotation}
           fontPath={"/fonts/Orbitron_Regular.json"}
           intensity={5}
-
         />               
       )}
 

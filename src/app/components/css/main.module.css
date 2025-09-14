@@ -1,43 +1,52 @@
 .header {
-  position: relative; /* important */
+  position: relative; 
   width: 100vw;
   height: 100vh;
   background-color: #000;
   overflow: hidden;
+  position:fixed;
 }
 
+.icon{
+  width:2rem;
+  height:2rem;
+}
 
-.articles{
- display:flex;
- flex-direction: row;
- justify-content: space-evenly; 
+.articles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 32px;
 }
 
 .articles article{
   padding:2rem;
 }
+
 .subWrapper {
   position: absolute;
   top: 250px;
-  z-index: 10; /* > Canvas */
+  z-index: 10; 
   display: flex;
   flex-wrap: wrap;
   gap: 2rem;
   padding: 2rem;
+  justify-content: space-evenly;
+  align-items: center;
 }
 
 .no-scroll {
   overflow: hidden;
   height: 100vh;
 }
+
 .subScreen {
   opacity: 0;
   position: relative;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 40%;
-  z-index: 20; /* encore plus haut si besoin */
+  z-index: 20; 
+  margin:0 auto;
 }
 
 
@@ -46,24 +55,13 @@
   color: #000;
 }
 
-/* Écran futuriste */
-.wrapper {
-  display: none; 
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  max-width: 400px;
-}
-
 .photo
 {
-  border:4px solid black;
-  border-bottom: 20px solid black;
-  padding: -10;
+  padding: -10px;
   max-width: 20em;
   max-height : 30em;
 }
-/* Cadre futuriste */
+
 .screenFrame {
   border-color: #009a22;
   border-left: 6px solid #222;
@@ -98,18 +96,16 @@
   margin-top: 1rem;
 }
 
-
-/* --- Tablette --- */
 @media (max-width: 1024px) {
   .subWrapper {
-    top: 150px; /* remonter un peu le contenu */
+    top: 150px; 
     flex-direction: column;
     gap: 1.5rem;
     padding: 1.5rem;
   }
 
   .subScreen {
-    max-width: 80%; /* plus large pour s'adapter à l'écran */
+    max-width: 80%; 
   }
 
   .screenFrame {
@@ -126,7 +122,6 @@
   }
 }
 
-/* --- Téléphone --- */
 @media (max-width: 600px) {
   .header canvas{
     width: 90vw !important;
@@ -142,10 +137,15 @@
   }
 
   .subScreen {
-    max-width: 100%; /* pleine largeur */
+    max-width: 100%; 
 
   }
-
+  .photo
+  {
+    padding: -5px;
+    max-width: 15em;
+    max-height : 20em;
+  }
   .screenFrame {
     padding: 1rem;
     max-width: 100%;

@@ -82,7 +82,7 @@ export const ShaderGLTF = forwardRef<Object3D, ShaderGLTFProps>(
     });
     shaderMat.current = mat;
     return mat;
-  }, [texture, viewport,scene]); // Ajout de viewport dans les dépendances
+  }, [texture, scene]);
 
 useEffect(() => {
   if (shaderMat.current) {
