@@ -2,10 +2,11 @@
 "use client";
 import { useState } from "react";
 import Style from "./css/contact.module.css";
+
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const adress = process.env.API_REST || "-1";
+  const adress = process.env.NEXT_PUBLIC_API_REST || "-1";
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
@@ -17,7 +18,6 @@ export default function ContactForm() {
     {
       setStatus("error");
       return;
-
     }
 
     try {
