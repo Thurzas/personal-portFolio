@@ -16,6 +16,7 @@ export default function ContactForm() {
     setStatus("loading");
     if(adress =="-1")
     {
+      console.info("no adress...wrong env ?");
       setStatus("error");
       return;
     }
