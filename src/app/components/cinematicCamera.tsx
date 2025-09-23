@@ -23,9 +23,9 @@ useEffect(() => {
   const ctx = gsap.context(() => {
     // Étape 1
     gsap.to(camera.position, {
-      x: 0,
+      x: -10,
       y: 3,
-      z: -40,
+      z: -21,
       scrollTrigger: {
         trigger: "#section-1",
         start: "top top",
