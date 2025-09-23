@@ -102,7 +102,18 @@
   margin-top: 1rem;
 }
 
+.subWrapper :global(section)
+{
+    height: 100vh;
+}
 @media (max-width: 1024px) {
+  .header {
+    width: 90vw;
+  }
+  .subWrapper :global(section)
+  {
+      height: fit-content !important;
+  }  
   .subWrapper {
     top: 150px; 
     flex-direction: column;
@@ -137,14 +148,14 @@
   .subWrapper {
     top: 100px; 
     padding: 1rem;
-    gap: 1rem;
+    gap: 20rem;
     display: flex;
     flex-direction: column;
   }
 
   .subScreen {
     max-width: 100%; 
-
+    height:fit-content;
   }
   .photo
   {

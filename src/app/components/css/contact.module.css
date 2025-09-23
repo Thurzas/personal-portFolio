@@ -1,8 +1,8 @@
 /* components/ContactForm.module.css */
 
 .form {
-  width:60vw;
-  margin: 0 auto;
+  width:80%;
+  margin: 2rem auto;
   padding: 2rem;
   background: #111;
   border-radius: 12px;
@@ -38,16 +38,6 @@
   border-color: #0f0;
 }
 
-.button {
-  padding: 0.8rem 1.2rem;
-  background: #0f0;
-  color: #000;
-  font-weight: bold;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
 
 .button:hover {
   background: #0c0;

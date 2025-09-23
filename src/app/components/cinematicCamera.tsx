@@ -23,9 +23,9 @@ useEffect(() => {
   const ctx = gsap.context(() => {
     // Étape 1
     gsap.to(camera.position, {
-      x: -10,
+      x: viewType === "mobile" ? -5 : -10,
       y: 3,
-      z: -21,
+      z: viewType === "mobile" ? -11 : -21,
       scrollTrigger: {
         trigger: "#section-1",
         start: "top top",
@@ -41,9 +41,9 @@ useEffect(() => {
 
     // Étape 2
     gsap.to(camera.position, {
-      x: viewType === "mobile" ? -5 : -10,
+      x: -10,
       y: 3,
-      z: -20,
+      z:-20,
       scrollTrigger: {
         trigger: "#section-2",
         start: "top top",
@@ -83,7 +83,7 @@ useEffect(() => {
           <ShaderText3DMatrix
             text={"Welcome on my site"}
             texturePath={"/textures/matrix_glyph_atlas.png"}
-            position={[1, 7, -55]}
+            position={[0, 10, -48]}
             rotation={[0, 0, 0]}
             fontPath={"/fonts/Orbitron_Regular.json"}
             intensity={5}
@@ -93,7 +93,7 @@ useEffect(() => {
             ref={nameRef}
             text={"Mathieu Miot"}
             texturePath={"/textures/matrix_glyph_atlas.png"}
-            position={[9, 5, -49]}
+            position={[-3, 5, -39]}
             rotation={[0, 0, 0]}
             fontPath={"/fonts/Orbitron_Regular.json"}
             intensity={5}

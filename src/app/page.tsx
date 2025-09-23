@@ -40,7 +40,7 @@ if (screenType === "tablet") {
         </Canvas>
       </div>
       <div className={Style.subWrapper}>
-          <section id="section-1" style={{ height: "100vh" }}>
+          <section id="section-1" >
             <ScifiScreen title="À propos de moi :"  triggerIn="#section-1" triggerOut="#section-3">
               <p>
                 Je m'appelle Matt, développeur passionné par les technologies et la créativité. 
@@ -57,7 +57,7 @@ if (screenType === "tablet") {
             </ScifiScreen>
           </section>
 
-          <section id="section-2" style={{ height: "100vh" }}>
+          <section id="section-2" >
             <ScifiScreen title="mes réseaux :"  triggerIn="#section-2" triggerOut="#section-3">
               <p>
                 <a href={"https://github.com/Thurzas"}>
@@ -71,7 +71,7 @@ if (screenType === "tablet") {
               </p>
             </ScifiScreen>
           </section>
-          <section id="section-3" style={{ height: "100vh" }}>
+          <section id="section-3" >
             <ScifiScreen title="mon travail :"  triggerIn="#section-3" triggerOut="#section-2">
               <div className={Style.articles}>
                 <article>
@@ -112,14 +112,13 @@ if (screenType === "tablet") {
                 </article>
               </div>
             </ScifiScreen>
-
           </section>
-
-          <section id="section-4" className="min-h-screen flex items-center justify-center bg-black text-white">
+          <section id="section-4" >
             <ScifiScreen title="Me contacter :"  triggerIn="#section-4" triggerOut="#section-3">
               <ContactForm />
             </ScifiScreen>
           </section>
+
       </div>
     </>
   );

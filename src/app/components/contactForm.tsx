@@ -42,14 +42,12 @@ export default function ContactForm() {
 
   return (
     <form className={Style.form} onSubmit={handleSubmit}>
-      <h2 className={Style.title}>Contact Me</h2>
-
       <input
         type="text"
         name="name"
         value={form.name}
         onChange={handleChange}
-        placeholder="Your Name"
+        placeholder="Votre nom"
         required
         className={Style.input}
       />
@@ -59,7 +57,7 @@ export default function ContactForm() {
         name="email"
         value={form.email}
         onChange={handleChange}
-        placeholder="Your Email"
+        placeholder="Votre Email"
         required
         className={Style.input}
       />
@@ -68,7 +66,7 @@ export default function ContactForm() {
         name="message"
         value={form.message}
         onChange={handleChange}
-        placeholder="Your Message"
+        placeholder="Votre message"
         rows={5}
         required
         className={Style.textarea}
