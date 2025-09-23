@@ -106,7 +106,8 @@
   background-color: #111;
   opacity: 80%;
   box-shadow: 0 0 20px #70ff8f;
-  border-radius: 15px;
+  border-radius: 15px;  
+  padding: 1rem;
 }
 
 .subWrapper :global(section)
