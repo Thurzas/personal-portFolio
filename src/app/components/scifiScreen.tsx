@@ -40,8 +40,10 @@ useEffect(() => {
   return (
     <div className={Style.subScreen} ref={containerRef}>
       <div className={Style.screenFrame}>
-        <h2>{title}</h2>
-        <div className={Style.content}>{children}</div>
+        <div className={Style.screenSurface}>
+          <h2>{title}</h2>
+          <div className={Style.content}>{children}</div>          
+        </div>
       </div>
     </div>
   );
