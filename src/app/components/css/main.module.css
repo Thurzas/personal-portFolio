@@ -1,193 +1,407 @@
+/* ── Canvas fixed background ── */
 .header {
-  position: relative; 
+  position: fixed;
+  top: 0; left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: #000;
+  background-color: var(--bg);
   overflow: hidden;
-  position:fixed;
+  z-index: 0;
 }
 
-.icon{
-  width:2rem;
-  height:2rem;
-}
-
-.articles {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-  gap: 32px;
-}
-
-.articles article{
-  padding:2rem;
-}
-
+/* ── Scrollable overlay ── */
 .subWrapper {
-  position: absolute;
-  top: 250px;
-  z-index: 10; 
+  position: relative;
+  z-index: 10;
   display: flex;
-  flex-wrap: wrap;
-  gap: 20rem;
-  padding: 2rem;
-  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 30rem;
+  padding: 2rem 2rem 12rem;
   align-items: center;
+  /* first section starts below the 3D hero */
+  padding-top: 110vh;
 }
 
-.no-scroll {
-  overflow: hidden;
-  height: 100vh;
+/* ── Full-width section container ── */
+.subWrapper section {
+  width: 100%;
+  max-width: 900px;
 }
 
+/* ── Stats bar is also constrained ── */
+.subWrapper > :not(section) {
+  width: 100%;
+  max-width: 900px;
+}
+
+/* ── Section card (ScifiScreen container) ── */
 .subScreen {
   opacity: 0;
-  position: relative;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  z-index: 20; 
-  margin:0 auto;
-  width: fit-content;
+  width: 100%;
 }
 
-
-.triggerBtn:hover {
-  background: #33f0dd;
-  color: #000;
-}
-
-.photo
-{
-  padding: -10px;
-  max-width: 20em;
-  max-height : 30em;
-  z-index: 999;
-  opacity: 1;
-}
-
+/* ── Section frame ── */
 .screenFrame {
-  border-color: #009a22;
-  border-left: 6px solid #222;
-  border-right: 6px solid #222;
-  border-top: none;
-  border-bottom: none;
-  padding: 1.5rem;
-  border-color:#009a22;
-  padding: 2rem;
-  width: fit-content;
-  margin: 0 auto;
+  background: rgba(13, 17, 23, 0.88);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  padding: 0;
+  width: 100%;
   position: relative;
-  border-radius: 15px;
-  z-index: 999;
-  opacity: 1;
+  overflow: hidden;
 }
 
-.screnFrame .articles{
+/* Coloured left accent bar — default green, overridable via inline style */
+.screenFrame::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--accent-color, var(--green));
+}
+
+/* ── Section header bar ── */
+.screenSurface {
+  padding: 24px 28px 28px 32px;
+}
+
+.sectionHeader {
   display: flex;
-  flex-direction: row;
-  z-index: 999;
-  opacity: 1;
-
-}
-.screenFrame h2 {
-  font-size: 2rem;
-  color: #009a22;
-  text-shadow: 0 0 20px #70ff8f;
-  padding-bottom: 2rem;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 20px;
 }
 
-.screenFrame h3 {
-  font-size: 2rem;
-  color: #009a22;
-  text-shadow: 0 0 20px #70ff8f;
-  padding: 2rem;  
+.sectionIcon {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--accent-color, var(--green));
+  color: var(--accent-color, var(--green));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  position: relative;
 }
+.sectionIcon::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  background: var(--accent-color, var(--green));
+  opacity: 0.08;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: #fff;
+  flex: 1;
+}
+
+.sectionBadge {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+.badgeGreen  { background: rgba(0,255,136,0.1);  color: var(--green);  border: 1px solid var(--green-muted); }
+.badgeCyan   { background: rgba(0,212,255,0.1);  color: var(--cyan);   border: 1px solid rgba(0,212,255,0.3); }
+.badgeAmber  { background: rgba(255,184,0,0.1);  color: var(--amber);  border: 1px solid rgba(255,184,0,0.3); }
+.badgePurple { background: rgba(176,109,255,0.1); color: var(--purple); border: 1px solid rgba(176,109,255,0.3); }
+
+/* ── Scanline divider ── */
+.scanline {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--green), transparent);
+  opacity: 0.35;
+  animation: scan 3s ease-in-out infinite;
+  /* no negative margin — gap: 30rem naturally centers it between sections */
+}
+@keyframes scan {
+  0%, 100% { opacity: 0.2; }
+  50%       { opacity: 0.7; }
+}
+
+/* ── Body text inside cards ── */
 .screenFrame p {
-  font-size: 1.1rem;
-  line-height: 1.4;
-  color: #eee;
-  margin-top: 1rem;
+  font-size: 11px;
+  line-height: 1.8;
+  color: var(--text-dim);
+  margin-top: 8px;
 }
-.screenSurface
-{
-  background-color: #111;
+
+/* ── Skill tags (À propos) ── */
+.skillTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.skillTag {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  color: var(--text-dim);
+  background: var(--bg3);
+  transition: border-color 0.2s, color 0.2s;
+}
+.skillTag:hover {
+  border-color: var(--green-muted);
+  color: var(--green);
+}
+
+/* ── Social links (Réseaux) ── */
+.socialList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.socialRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  font-size: 11px;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.socialRow:hover { border-color: var(--cyan); }
+.socialPlatform {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cyan);
+  width: 72px;
+  flex-shrink: 0;
+}
+.socialArrow { color: var(--text-faint); flex-shrink: 0; }
+.socialHandle { color: var(--text-dim); flex: 1; }
+.socialExt {
+  font-size: 9px;
+  color: var(--text-faint);
+  white-space: nowrap;
+}
+
+/* ── Project grid ── */
+.articles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+/* ── Project card ── */
+.articles article {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  padding: 18px 20px;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.2s, transform 0.2s;
+}
+/* left accent bar per card — cycles through accent colours */
+.articles article::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: var(--card-accent, var(--amber));
+}
+.articles article:hover {
+  border-color: var(--amber);
+  transform: translateY(-2px);
+}
+
+.cardType {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--amber);
+  margin-bottom: 8px;
+  display: block;
+}
+
+.articles article h4 {
+  font-size: 12px;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 0.04em;
+  margin-bottom: 6px;
+}
+
+.articles article p {
+  font-size: 11px;
+  color: var(--text-dim);
+  line-height: 1.6;
+  margin-top: 0;
+}
+
+.articleLinks {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+  flex-wrap: wrap;
+}
+.articleLinks a {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 10px;
+  color: var(--green);
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.articleLinks a:hover { color: var(--cyan); }
+
+/* ── Icon (SVG github/linkedin) ── */
+.icon {
+  width: 14px;
+  height: 14px;
+  filter: invert(1) sepia(1) saturate(3) hue-rotate(90deg);
   opacity: 0.8;
-  box-shadow: 0 0 20px #70ff8f;
-  border-radius: 15px;  
-  padding: 1rem;
 }
 
-@media (max-width: 1024px) {
-  .header {
-    width: 90vw;
-  }
-  .subWrapper {
-    flex-direction: column;
-    gap: 15rem;
-    padding: 0;    
-  }
+/* ── Project screenshot ── */
+.photo {
+  display: block;
+  width: 100%;
+  max-height: 160px;
+  object-fit: cover;
+  margin-top: 14px;
+  border: 1px solid var(--border);
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+.photo:hover { opacity: 1; }
 
-  .subScreen {
-    width:fit-content;
-  }
-
-  .screenFrame {
-    padding: 1.5rem;
-    max-width: 90%;
-  }
-
-  .screenFrame h2 {
-    font-size: 1.8rem;
-  }
-
-  .screenFrame p {
-    font-size: 1rem;
-  }
+/* ── Stats bar ── */
+.statsBar {
+  width: 100%;
+  max-width: 900px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  /* no CSS animation — element is at 110vh, user must scroll to see it */
+}
+.stat {
+  background: var(--bg2);
+  padding: 22px 18px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+.stat:hover { background: var(--bg3); }
+.stat::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+.stat:hover::after { transform: scaleX(1); }
+.statN {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 800;
+  color: var(--green);
+  line-height: 1;
+  display: block;
+}
+.statL {
+  font-size: 9px;
+  color: var(--text-dim);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-top: 6px;
+  display: block;
 }
 
-@media (max-width: 600px) {
-  .header canvas{
-    width: 90vw !important;
-    height:50vh !important;
-    margin: 0 auto;
-  }
+/* ── Footer ── */
+.footer {
+  width: 100%;
+  max-width: 900px;
+  margin-top: 40px;
+  padding-top: 28px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 10px;
+  color: var(--text-faint);
+  letter-spacing: 0.06em;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.footerLogo {
+  font-family: var(--font-display);
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--green);
+  letter-spacing: -0.02em;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive : tablet (641px – 1024px) ── */
+@media (min-width: 641px) and (max-width: 1024px) {
   .subWrapper {
-    top: 100px; 
-    padding: 1rem;
-    gap: 20rem;
-    display: flex;
-    flex-direction: column;
+    padding-top: 105vh;
+    gap: 24rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
+  .sectionTitle  { font-size: 16px; }
+  .statN         { font-size: 26px; }
+  .articles      { grid-template-columns: 1fr 1fr; }
+  .socialExt     { display: none; } /* too cramped on tablet */
+}
 
-  .subScreen {
-    max-width: 100%; 
-    height:fit-content;
+/* ── Responsive : mobile (≤ 640px) ── */
+@media (max-width: 640px) {
+  .subWrapper {
+    padding: 90vh 1rem 8rem;
+    gap: 18rem;
   }
-  .photo
-  {
-    padding: -5px;
-    max-width: 15em;
-    max-height : 20em;
+  .statsBar {
+    grid-template-columns: repeat(2, 1fr);
   }
-  .screenFrame {
-    padding: 1rem;
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    width:80%;
-    width: fit-content;
+  .statN { font-size: 24px; }
+  .articles {
+    grid-template-columns: 1fr;
   }
-
-  .articles{
-    flex-direction: column;
+  .screenSurface {
+    padding: 16px 14px 20px 18px;
   }
-
-  .screenFrame h2 {
-    font-size: 1.5rem;
-    padding-bottom: 1rem;
-  }
-
-  .screenFrame p {
-    font-size: 0.95rem;
-  }
+  .sectionTitle  { font-size: 15px; }
+  .sectionIcon   { width: 30px; height: 30px; font-size: 14px; }
+  .socialPlatform { width: 56px; }
+  .socialExt     { display: none; }
+  .footer        { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .skillTag      { font-size: 9px; padding: 3px 8px; }
 }

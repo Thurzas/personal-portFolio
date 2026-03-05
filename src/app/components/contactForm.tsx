@@ -42,25 +42,26 @@ export default function ContactForm() {
 
   return (
     <form className={Style.form} onSubmit={handleSubmit}>
-      <input
-        type="text"
-        name="name"
-        value={form.name}
-        onChange={handleChange}
-        placeholder="Votre nom"
-        required
-        className={Style.input}
-      />
-
-      <input
-        type="email"
-        name="email"
-        value={form.email}
-        onChange={handleChange}
-        placeholder="Votre Email"
-        required
-        className={Style.input}
-      />
+      <div className={Style.inputGroup}>
+        <input
+          type="text"
+          name="name"
+          value={form.name}
+          onChange={handleChange}
+          placeholder="Votre nom"
+          required
+          className={Style.input}
+        />
+        <input
+          type="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          placeholder="Votre email"
+          required
+          className={Style.input}
+        />
+      </div>
 
       <textarea
         name="message"
@@ -77,14 +78,14 @@ export default function ContactForm() {
         disabled={status === "loading"}
         className={Style.button}
       >
-        {status === "loading" ? "Sending..." : "Send Message"}
+        {status === "loading" ? "Envoi…" : "Envoyer"}
       </button>
 
       {status === "success" && (
-        <p className={Style.success}>✅ Message sent successfully!</p>
+        <p className={Style.success}>Message envoyé avec succès.</p>
       )}
       {status === "error" && (
-        <p className={Style.error}>❌ Something went wrong. Try again.</p>
+        <p className={Style.error}>Une erreur est survenue. Réessayez.</p>
       )}
     </form>
   );
