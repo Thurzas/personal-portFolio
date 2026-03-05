@@ -31,7 +31,10 @@ export default function Navbar() {
   }, []);
 
   const scrollTo = (id: string) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    const el = document.getElementById(id);
+    if (!el) return;
+    const top = el.getBoundingClientRect().top + window.scrollY - 64;
+    window.scrollTo({ top, behavior: "smooth" });
   };
 
   return (
@@ -54,6 +57,15 @@ export default function Navbar() {
           </li>
         ))}
       </ul>
+      <a
+        className={Style.cvBtn}
+        href="/cv-mathieu-miot.pdf"
+        download="CV_Mathieu_Miot.pdf"
+        target="_blank"
+        rel="noreferrer"
+      >
+        ↓ CV
+      </a>
     </nav>
   );
 }
