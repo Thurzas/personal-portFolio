@@ -139,7 +139,7 @@ export default function Home() {
           >
             <div className={Style.articles}>
               <article>
-                <span className={Style.cardType}>CrewAI · Agent IA · Python</span>
+                <span className={Style.cardType}>Agent IA · Python</span>
                 <h4>Mnemo</h4>
                 <p>
                   Assistant IA 100% local, dockerisé. Pipeline multi-étapes pour assister le LLM :
@@ -147,6 +147,11 @@ export default function Home() {
                   connaissance custom), ingestion de fichiers texte. Routing décisionnel hybride Python / ML / LLM.
                 </p>
                 <img className={Style.photo} alt="Mnemo — agent IA local" src="img/mnemo.png" />
+                <div className={Style.cardTags}>
+                  {["Python", "CrewAI", "Docker", "RAG", "Ollama"].map((t) => (
+                    <span key={t} className={Style.cardTag}>{t}</span>
+                  ))}
+                </div>
                 <div className={Style.articleLinks}>
                   <a href="https://github.com/Thurzas/Mnemo" target="_blank" rel="noreferrer">
                     <img className={Style.icon} alt="" src="img/github-icon.svg" /> GitHub
@@ -158,13 +163,18 @@ export default function Home() {
               </article>
 
               <article>
-                <span className={Style.cardType}>Fullstack</span>
+                <span className={Style.cardType}>Fullstack · Équipe</span>
                 <h4>Le Cookie du patron</h4>
                 <p>
                   Boutique en ligne d'une &quot;dark kitchen&quot; faite en équipe durant ma formation.
                   Front React, back API Node.
                 </p>
                 <img className={Style.photo} alt="Le cookie du patron" src="img/CookiPatron.png" />
+                <div className={Style.cardTags}>
+                  {["React", "Node.js", "Express", "MySQL", "REST API"].map((t) => (
+                    <span key={t} className={Style.cardTag}>{t}</span>
+                  ))}
+                </div>
                 <div className={Style.articleLinks}>
                   <a href="https://github.com/WildCodeSchool/nov24-RemFR-Vert-FullStackAlchemist-G2-P3" target="_blank" rel="noreferrer">
                     <img className={Style.icon} alt="" src="img/github-icon.svg" /> GitHub
@@ -177,6 +187,11 @@ export default function Home() {
                 <h4>La gazette du sorcier</h4>
                 <p>Forum écrit en PHP en équipe.</p>
                 <img className={Style.photo} alt="La gazette du sorcier" src="img/forumGazetteDuSorcier.png" />
+                <div className={Style.cardTags}>
+                  {["PHP", "MySQL", "MVC", "HTML", "CSS"].map((t) => (
+                    <span key={t} className={Style.cardTag}>{t}</span>
+                  ))}
+                </div>
                 <div className={Style.articleLinks}>
                   <a href="https://github.com/WildCodeSchool-2024-02/PHP-REM-POEC-05-Gazette-Sorciers" target="_blank" rel="noreferrer">
                     <img className={Style.icon} alt="" src="img/github-icon.svg" /> GitHub
@@ -189,6 +204,12 @@ export default function Home() {
                 <h4>Blackhole</h4>
                 <p>Test de collision inspiré du problème à n corps, avec quadtree.</p>
                 <img className={Style.photo} alt="Blackhole collision test" src="img/blackhole.png" />
+                <div className={Style.cardTags}>
+                  {["JavaScript", "Canvas 2D", "Quadtree"].map((t) => (
+                    <span key={t} className={Style.cardTag}>{t}</span>
+                  ))}
+                  <span className={`${Style.cardTag} ${Style.cardTagChallenge}`}>Code Challenge</span>
+                </div>
                 <div className={Style.articleLinks}>
                   <a href="https://codepen.io/Thurzas/pen/dyJzOLe" target="_blank" rel="noreferrer">
                     ↗ CodePen
@@ -201,6 +222,12 @@ export default function Home() {
                 <h4>Dungeon procédural</h4>
                 <p>Génération procédurale de donjons.</p>
                 <img className={Style.photo} alt="Procedural dungeon" src="img/procedural.png" />
+                <div className={Style.cardTags}>
+                  {["Processing", "Java", "Génératif"].map((t) => (
+                    <span key={t} className={Style.cardTag}>{t}</span>
+                  ))}
+                  <span className={`${Style.cardTag} ${Style.cardTagChallenge}`}>Code Challenge</span>
+                </div>
                 <div className={Style.articleLinks}>
                   <a href="https://github.com/Thurzas/ProceduralDungeon" target="_blank" rel="noreferrer">
                     <img className={Style.icon} alt="" src="img/github-icon.svg" /> GitHub
@@ -213,6 +240,12 @@ export default function Home() {
                 <h4>Ant Colony Simulation</h4>
                 <p>Simulation de colonie de fourmis avec phéromones.</p>
                 <img className={Style.photo} alt="Ant colony simulation" src="img/ants.jpg" />
+                <div className={Style.cardTags}>
+                  {["Processing", "Java", "Algorithmes"].map((t) => (
+                    <span key={t} className={Style.cardTag}>{t}</span>
+                  ))}
+                  <span className={`${Style.cardTag} ${Style.cardTagChallenge}`}>Code Challenge</span>
+                </div>
                 <div className={Style.articleLinks}>
                   <a href="https://github.com/Thurzas/ants" target="_blank" rel="noreferrer">
                     <img className={Style.icon} alt="" src="img/github-icon.svg" /> GitHub

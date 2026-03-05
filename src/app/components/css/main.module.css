@@ -245,6 +245,31 @@
   margin-bottom: 6px;
 }
 
+/* ── Tech stack tags inside project cards ── */
+.cardTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+.cardTag {
+  font-size: 8px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border: 1px solid rgba(255,184,0,0.2);
+  color: var(--amber);
+  background: rgba(255,184,0,0.05);
+}
+.cardTagChallenge {
+  border-color: rgba(176,109,255,0.3);
+  color: var(--purple);
+  background: rgba(176,109,255,0.06);
+}
+
 .articles article p {
   font-size: 11px;
   color: var(--text-dim);
