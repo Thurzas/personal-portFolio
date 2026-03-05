@@ -14,7 +14,7 @@ const syne = Syne({
   weight: ["400", "700", "800"],
 });
 
-const SITE_URL = "https://personal-port-folio-2nt89bm49-thurzas-projects.vercel.app"; // ← remplace par ton URL
+const SITE_URL = "https://personal-port-folio-2nt89bm49-thurzas-projects.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
