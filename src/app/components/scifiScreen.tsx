@@ -33,16 +33,16 @@ const ScifiScreen = ({
 
     gsap.fromTo(
       el,
-      { scaleX: 0, opacity: 0 },
+      { opacity: 0, y: 28 },
       {
-        scaleX: 1,
         opacity: 1,
-        duration: 0.6,
-        ease: "expo.out",
+        y: 0,
+        duration: 0.7,
+        ease: "power3.out",
         scrollTrigger: {
           trigger: triggerIn,
-          start: "top 80%",
-          end: "bottom 20%",
+          start: "top 78%",
+          end: "bottom top",
           toggleActions: "play reverse play reverse",
         },
       }

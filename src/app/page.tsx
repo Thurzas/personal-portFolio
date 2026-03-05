@@ -6,6 +6,7 @@ import { CinematicCamera } from "./components/cinematicCamera";
 import ScifiScreen from "./components/scifiScreen";
 import useScreenType from "./components/useScrenType";
 import ContactForm from "./components/contactForm";
+import Navbar from "./components/navbar";
 
 export default function Home() {
   const cameraRef = useRef<HTMLCanvasElement>(null);
@@ -24,6 +25,7 @@ export default function Home() {
 
   return (
     <>
+      <Navbar />
       <div className={Style.header} style={{ width: "100vw", height: "100vh" }}>
         <Canvas
           className={Style.header}
@@ -43,7 +45,7 @@ export default function Home() {
         {/* ── Stats bar ── */}
         <div className={Style.statsBar}>
           <div className={Style.stat}>
-            <span className={Style.statN}>5</span>
+            <span className={Style.statN}>6</span>
             <span className={Style.statL}>projets</span>
           </div>
           <div className={Style.stat}>
@@ -136,6 +138,25 @@ export default function Home() {
             triggerOut="#section-2"
           >
             <div className={Style.articles}>
+              <article>
+                <span className={Style.cardType}>CrewAI · Agent IA · Python</span>
+                <h4>Mnemo</h4>
+                <p>
+                  Assistant IA 100% local, dockerisé. Pipeline multi-étapes pour assister le LLM :
+                  recherche web intégrée, mémoire RAG triple couche (tasks, expérience utilisateur,
+                  connaissance custom), ingestion de fichiers texte. Routing décisionnel hybride Python / ML / LLM.
+                </p>
+                <img className={Style.photo} alt="Mnemo — agent IA local" src="img/mnemo.png" />
+                <div className={Style.articleLinks}>
+                  <a href="https://github.com/Thurzas/Mnemo" target="_blank" rel="noreferrer">
+                    <img className={Style.icon} alt="" src="img/github-icon.svg" /> GitHub
+                  </a>
+                  <a href="https://thurzas.github.io/Landing_Page_Mnemo/" target="_blank" rel="noreferrer">
+                    ↗ Landing page
+                  </a>
+                </div>
+              </article>
+
               <article>
                 <span className={Style.cardType}>Fullstack</span>
                 <h4>Le Cookie du patron</h4>
